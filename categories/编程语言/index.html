@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Effective C++ 概览（备忘) 一 |  ZhenXing&#39;s Bolg
+    编程语言 |  ZhenXing&#39;s Bolg
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -34,214 +34,56 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-lang/c++/EffectiveCPP" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">编程语言</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2020" class="archive-year">2020</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2020/03/28/lang/c++/EffectiveCPP/" class="archive-article-date">
+  <time datetime="2020-03-28T07:04:18.000Z" itemprop="datePublished">03/28</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Effective C++ 概览（备忘) 一
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2020/03/28/lang/c++/EffectiveCPP/"
+    >Effective C++ 概览（备忘) 一</a> 
+</h2>
  
 
     </header>
     
-
-    
-    <div class="article-meta">
-      <a href="/2020/03/28/lang/c++/EffectiveCPP/" class="article-date">
-  <time datetime="2020-03-28T07:04:18.000Z" itemprop="datePublished">2020-03-28</time>
-</a>
       
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
   </div>
 
-      
-    </div>
-    
-
     
     
-    <div class="tocbot"></div>
-
-
-
-
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>从本科到研究生，一直在与计算机打交道。学过的语言不算太多，也不精通；但是林林总总细数起来，从直接操作硬件的x86汇编语言，到稍微“人性化”点的C/C++，再到 “万能的”Java和C#，最后到Python， Haskell， Matlab 这类和普通英文句子相差无几的脚本语言，上述语言都是可用来完成各种任务的“通用语言”。 与此相对的则是域专用语言（Domain Specific Language DSL）例如SQL（作为关系代数的抽象）和NED（用来描述网络拓扑），他们的功能单一但效果强大，就如同小情侣之间的幽幽情话，只能一个来说，也只能另一个来听；说的人不对，或者听的人不合，就会显得荒唐。但这些话在他两之间却一语顶千言。</p>
-<p>当然上述的各种语言只是冰山一角。一方面不断有新的编程语言出现，另一方面语言本身也在随着时间不断进化。我曾经花了很多时间去学习语言的语法和语义规则。学了忘，忘了学。时间消耗掉了，却感觉始终不得其法； 始终没有了然于胸的感觉。</p>
-<p>大部分教科书采用的是自底向上，分门别类的编排。 太多琐碎的细节，如同一盘散沙，越是刻意去记忆，忘的就越快。在此我试着从较高的角度区审视这些编程语言。</p>
-<p><strong>语言是什么？编程语言是什么？</strong></p>
-<p> 语言是表达思维的工具！漂亮的语言绝非可以堆砌，而是底层思维活动的反映。语言用来和人互动，编程语言则用来和机器互动（虽然这种互动缺少了某种灵性，但好在机器会十分忠实地执行命令）</p>
-<p><strong>为什么有那么多的编程语言</strong></p>
-<p>如同白话之于文言，口头之于书面，汉字之于数学符号。它们的使用场景不同，不同的场景下对编程语言所展现的特性不同。</p>
-<p><strong>为什么需要新的编程语言</strong></p>
-<p>编程语言的发展会越来越慢，因为但千百外的程序言和机器都在使用它的时候，编程语言是很难不管不顾他们的感受，随意改变，任性到底的。所谓积重难返，因此不破不立。新的语言没有历史包袱，往往能吸取实践中的各种教训做到青出于蓝。</p>
-<p><strong>抽象</strong></p>
-<p>上面提到语言是思维的工具，是思维的反映，思维的结果；而思维往往是抽象的。这是抽象的第一层含义，这里的抽象是指人在解决复杂而庞大的问题过程中，捋清思绪，提炼信息，得出结论。越是复杂的问题，思维的抽象就越明显。</p>
-<p>对话的双方都是人类时两端的抽象过程或许是对称的，但是编程语言是人与机器的对话，这种抽象可能在两端不对等。人的思维过程或许是叵测的，但机器的“思维过程”却是透明的，由它的设计者亲手制定。这里只举一个这样的例子：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUSH ESP</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-      <!-- reward -->
-      
-      <div id="reward-btn">
-        打赏
-      </div>
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-        <div class="declare">
-          <ul class="post-copyright">
-            <li>
-              <i class="ri-copyright-line"></i>
-              <strong>版权声明： </strong s>
-              本博客所有文章除特别声明外，均采用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
-                target="_blank">Apache License 2.0</a> 许可协议。转载请注明出处！
-            </li>
-          </ul>
-        </div>
-        
-    <footer class="article-footer">
-      
-          
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://hbjzxzx.github.io/2020/03/28/lang/c++/EffectiveCPP/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
-
-
-    </footer>
-
   </div>
-
-  
-  
-
-  
-
-  
-  
-<!-- valine评论 -->
-<div id="vcomments-box">
-    <div id="vcomments">
-    </div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        app_id: 'Pa9B81lr3WmxUwMm2P0bNfXL-gzGzoHsz',
-        app_key: '5ASRcJBs7Km3lByNu9JDCQLC',
-        path: window.location.pathname,
-        notify: 'false',
-        verify: 'false',
-        avatar: 'mp',
-        placeholder: '给我的文章加点评论吧~',
-        recordIP: true
-    });
-    const infoEle = document.querySelector('#vcomments .info');
-    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-        infoEle.childNodes.forEach(function (item) {
-            item.parentNode.removeChild(item);
-        });
-    }
-</script>
-<style>
-    #vcomments-box {
-        padding: 5px 30px;
-    }
-
-    @media screen and (max-width: 800px) {
-        #vcomments-box {
-            padding: 5px 0px;
-        }
-    }
-
-    #vcomments-box #vcomments {
-        background-color: #fff;
-    }
-
-    .v .vlist .vcard .vh {
-        padding-right: 20px;
-    }
-
-    .v .vlist .vcard {
-        padding-left: 10px;
-    }
-</style>
-
-  
-
-  
-  
-  
-
 </article>
+      
+      
+    </div>
+  </div>
+  
+  
+
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -381,24 +223,6 @@
 
 
 
-
-
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: 'main',
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto'
-  });
-</script>
 
 
 
