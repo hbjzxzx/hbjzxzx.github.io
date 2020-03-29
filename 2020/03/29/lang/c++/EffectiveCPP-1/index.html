@@ -60,6 +60,27 @@
   </div>
 
       
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4分钟</span>
+        </span>
+    </span>
+</div>
+
+      
     </div>
     
 
@@ -79,16 +100,28 @@
       
 
       
-      <h1 id="C-：语言的联邦（federation-of-languages）"><a href="#C-：语言的联邦（federation-of-languages）" class="headerlink" title="C++ ：语言的联邦（federation of languages）"></a>C++ ：语言的联邦（federation of languages）</h1><h2 id="1-四大范式"><a href="#1-四大范式" class="headerlink" title="1 四大范式:"></a>1 四大范式:</h2><pre><code>1.  C的面向过程
- 2.  C with Class
- 3.  Template C++
- 4.  STL</code></pre><p>范式内部是和谐统一的，但是范式之间C++的规则可能很琐碎</p>
+      <h1 id="C-：语言的联邦（federation-of-languages）"><a href="#C-：语言的联邦（federation-of-languages）" class="headerlink" title="C++ ：语言的联邦（federation of languages）"></a>C++ ：语言的联邦（federation of languages）</h1><h2 id="1-四大范式"><a href="#1-四大范式" class="headerlink" title="1 四大范式:"></a>1 四大范式:</h2><ol>
+<li>C的面向过程<ol start="2">
+<li>C with Class</li>
+<li>Template C++</li>
+<li>STL</li>
+</ol>
+</li>
+</ol>
+<p>范式内部是和谐统一的，但是范式之间C++的规则可能很琐碎</p>
 <h2 id="2-尽量使用const-enum-inline-而不是-define"><a href="#2-尽量使用const-enum-inline-而不是-define" class="headerlink" title="2 尽量使用const, enum, inline 而不是 #define"></a>2 尽量使用const, enum, inline 而不是 #define</h2><p>原因</p>
+<a id="more"></a>
+
 <p>#define 是与处理阶段，可以不被视为语言的一部分。使用起来存在很多陷阱</p>
 <p>#define 定义常量存在的问题</p>
-<pre><code>1.  编译后Symbol Table中没有#define记号。 **难以调试**
- 2.  多次替换会导致代码**体积膨胀**
- 3.  #define 没有作用域，没有封装</code></pre><p>#define定义宏函数存在的问题</p>
+<ol>
+<li>编译后Symbol Table中没有#define记号。 <strong>难以调试</strong><ol start="2">
+<li>多次替换会导致代码<strong>体积膨胀</strong></li>
+<li>#define 没有作用域，没有封装</li>
+</ol>
+</li>
+</ol>
+<p>#define定义宏函数存在的问题</p>
 <ol>
 <li><p>类型安全性不受保障</p>
 </li>
@@ -124,10 +157,10 @@
 
 <h2 id="4-确定每个使用的对象都已被初始化"><a href="#4-确定每个使用的对象都已被初始化" class="headerlink" title="4 确定每个使用的对象都已被初始化"></a>4 确定每个使用的对象都已被初始化</h2><p>C++的C语言“部分”不进行对象初始化，需要手工进行</p>
 <p>C++的Class部分保证进行初始化，即所有class都有构造函数负责初始化</p>
-<p>构造函数中注意 初始化列表和在构造函数体中进行赋值的区别（一个是真正的初始化，另一个是默认初始化+赋值）</p>
+<p>构造函数中注意 <strong>初始化列表</strong>和在构造函数体中进行赋值的区别（一个是真正的初始化，另一个是默认初始化+赋值）</p>
 <p>如果成员变量是 const 或者 reference 那么必须一初始化列表的形式进行</p>
 <p>初始化的顺序严格等于类定义中的顺序，与初始化列表顺序无关，建议初始化列表的顺序和定义顺序一致</p>
-<p>C++对非局部的static-object初始化顺序没有定义！！！两个编译单元之间的引用，可以通过local-static-object的形式进行改造，获得一种Singleton模式的实现，因为c++保证local-static-object在使用前进行初始化</p>
+<p>C++对非局部的static-object初始化顺序没有定义！！！两个编译单元之间的引用，可以通过local-static-object的形式进行改造，获得一种Singleton模式的实现，因为c++<strong>保证local-static-object在使用前进行初始化</strong></p>
 
       
       <!-- reward -->
@@ -203,7 +236,7 @@
     
       <a href="/2020/03/28/lang/c++/EffectiveCPP/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Effective C++ 概览（备忘) 一</div>
+        <div class="article-nav-title">EffectiveCPP 备忘Chp0</div>
       </a>
     
   </nav>
