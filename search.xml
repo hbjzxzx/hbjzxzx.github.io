@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>EffectiveCPP 备忘Chp1</title>
+    <url>/2020/03/29/lang/c++/EffectiveCPP-1/</url>
+    <content><![CDATA[<h1 id="C-：语言的联邦（federation-of-languages）"><a href="#C-：语言的联邦（federation-of-languages）" class="headerlink" title="C++ ：语言的联邦（federation of languages）"></a>C++ ：语言的联邦（federation of languages）</h1><h2 id="1-四大范式"><a href="#1-四大范式" class="headerlink" title="1 四大范式:"></a>1 四大范式:</h2><pre><code>1.  C的面向过程
+ 2.  C with Class
+ 3.  Template C++
+ 4.  STL</code></pre><p>范式内部是和谐统一的，但是范式之间C++的规则可能很琐碎</p>
+<h2 id="2-尽量使用const-enum-inline-而不是-define"><a href="#2-尽量使用const-enum-inline-而不是-define" class="headerlink" title="2 尽量使用const, enum, inline 而不是 #define"></a>2 尽量使用const, enum, inline 而不是 #define</h2><p>原因</p>
+<p>#define 是与处理阶段，可以不被视为语言的一部分。使用起来存在很多陷阱</p>
+<p>#define 定义常量存在的问题</p>
+<pre><code>1.  编译后Symbol Table中没有#define记号。 **难以调试**
+ 2.  多次替换会导致代码**体积膨胀**
+ 3.  #define 没有作用域，没有封装</code></pre><p>#define定义宏函数存在的问题</p>
+<ol>
+<li><p>类型安全性不受保障</p>
+</li>
+<li><p>不可预料的行为</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CALL_WITH_MAX(a,b) f((a) &gt; (b) ? (a) : (b))</span></span><br><span class="line"><span class="keyword">int</span> a=<span class="number">5</span>, b=<span class="number">0</span>;</span><br><span class="line">CALL_WITH_MAX(++a, b); <span class="comment">//a + 2!!</span></span><br><span class="line">CALL_WITH_MAX(++a, b+<span class="number">10</span>); <span class="comment">//a+1</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>预处理指令使用的正确范围：编译控制，而不是杂揉到编译的指令之中。</p>
+<p>对于常量的定义，着重强调带有作用域范围的类内常量。于此相关的是In-class initialing相关的主题。</p>
+<p>对于宏函数的替代，使用inline函数 + Template 函数模板代替</p>
+<h2 id="3-尽量使用const"><a href="#3-尽量使用const" class="headerlink" title="3 尽量使用const"></a>3 尽量使用const</h2><p>施加语义约束，而编译器负责检查代码在约束范围内。</p>
+<h3 id="常指针和指向常量的指针"><a href="#常指针和指向常量的指针" class="headerlink" title="常指针和指向常量的指针"></a>常指针和指向常量的指针</h3><p>关键字const在 * 号左边则表示被指的物体是常量。出现在 * 右边表示指针本身为常量</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p = <span class="string">"Hello world"</span>; <span class="comment">//常对象</span></span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p = <span class="string">"hello world"</span>; <span class="comment">//常指针</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p = <span class="string">"hello world"</span>; <span class="comment">//双常</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">const</span> Widget* pw)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(Wideget <span class="keyword">const</span>* pw)</span></span>; <span class="comment">//两种都OK，表示常对象</span></span><br></pre></td></tr></table></figure>
+
+<p>在STL领域中，迭代器抽象了指针。对迭代器使用const表示 常迭代器=常指针。而指向常量的迭代器由新的类const_iterator表示</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator iter = vec.<span class="built_in">begin</span>(); <span class="comment">//类似于 int* const iter;</span></span><br><span class="line">iter++; <span class="comment">//Error</span></span><br><span class="line">*iter = <span class="number">1</span>; <span class="comment">//Ok</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator cIter = vec.<span class="built_in">begin</span>();<span class="comment">// 类似于 const int* cIter;</span></span><br><span class="line">cIter++; <span class="comment">//OK</span></span><br><span class="line">*cIter = <span class="number">10</span>; Error;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>施加约束减少错误的一个例子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span> &#123;</span>...&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Rational <span class="keyword">operator</span>* (<span class="keyword">const</span> Rational&amp; lhs, <span class="keyword">const</span> Rational&amp; rhs);</span><br><span class="line">Rational a, b, c;</span><br><span class="line"><span class="keyword">if</span>(a*b = c) <span class="comment">// 误写 a*b == c</span></span><br><span class="line">  <span class="comment">//在cosnt约束下，编译器会自动报错！ 因为const不可被赋值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="const成员函数"><a href="#const成员函数" class="headerlink" title="const成员函数"></a>const成员函数</h3><p>const成员函数应作用于常对象。具体约束由形式为</p>
+<pre><code>1. **bitwise-constness**:  对象严格不变（默认行为） 
+2. **Logical-constness**:  对象对外看起来不变（需要用 mutable 覆盖那些变化的成员，跳过编译检查 ）</code></pre><p>const成员函数可以依据是否存在const约束而进行<strong>重载</strong></p>
+<p>这通常会导致代码冗余，解决办法是 非const版本调用const版本。因为const版本“外沿”更小，正确性有保障。调用时可通过const_cast&lt;.&gt;和 static_cast&lt;&gt;作变换。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBlock</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[](<span class="built_in">std</span>::<span class="keyword">size_t</span> <span class="built_in">position</span>) <span class="keyword">const</span>&#123;</span><br><span class="line">		...</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">text</span>[<span class="built_in">position</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">char</span>&amp; <span class="keyword">operator</span>[](<span class="built_in">std</span>::<span class="keyword">size_t</span> positon)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>&amp;&gt; (				<span class="comment">//移除返回值的const性质</span></span><br><span class="line">            <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> TextBlock&amp;&gt;(*<span class="keyword">this</span>) <span class="comment">//为自己添加 const属性</span></span><br><span class="line">            [<span class="built_in">position</span>]							<span class="comment">//调用常版本</span></span><br><span class="line">        );</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-确定每个使用的对象都已被初始化"><a href="#4-确定每个使用的对象都已被初始化" class="headerlink" title="4 确定每个使用的对象都已被初始化"></a>4 确定每个使用的对象都已被初始化</h2><p>C++的C语言“部分”不进行对象初始化，需要手工进行</p>
+<p>C++的Class部分保证进行初始化，即所有class都有构造函数负责初始化</p>
+<p>构造函数中注意 初始化列表和在构造函数体中进行赋值的区别（一个是真正的初始化，另一个是默认初始化+赋值）</p>
+<p>如果成员变量是 const 或者 reference 那么必须一初始化列表的形式进行</p>
+<p>初始化的顺序严格等于类定义中的顺序，与初始化列表顺序无关，建议初始化列表的顺序和定义顺序一致</p>
+<p>C++对非局部的static-object初始化顺序没有定义！！！两个编译单元之间的引用，可以通过local-static-object的形式进行改造，获得一种Singleton模式的实现，因为c++保证local-static-object在使用前进行初始化</p>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>C++经典书籍</tag>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Effective C++ 概览（备忘) 一</title>
     <url>/2020/03/28/lang/c++/EffectiveCPP/</url>
     <content><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>从本科到研究生，一直在与计算机打交道。学过的语言不算太多，也不精通；但是林林总总细数起来，从直接操作硬件的x86汇编语言，到稍微“人性化”点的C/C++，再到 “万能的”Java和C#，最后到Python， Haskell， Matlab 这类和普通英文句子相差无几的脚本语言，上述语言都是可用来完成各种任务的“通用语言”。 与此相对的则是域专用语言（Domain Specific Language DSL）例如SQL（作为关系代数的抽象）和NED（用来描述网络拓扑），他们的功能单一但效果强大，就如同小情侣之间的幽幽情话，只能一个来说，也只能另一个来听；说的人不对，或者听的人不合，就会显得荒唐。但这些话在他两之间却一语顶千言。</p>
