@@ -146,8 +146,14 @@
 
 
 <h3 id="const成员函数"><a href="#const成员函数" class="headerlink" title="const成员函数"></a>const成员函数</h3><p>const成员函数应作用于常对象。具体约束由形式为</p>
-<pre><code>1. **bitwise-constness**:  对象严格不变（默认行为） 
-2. **Logical-constness**:  对象对外看起来不变（需要用 mutable 覆盖那些变化的成员，跳过编译检查 ）</code></pre><p>const成员函数可以依据是否存在const约束而进行<strong>重载</strong></p>
+<ol>
+<li><p><strong>bitwise-constness</strong>:  对象严格不变（默认行为） </p>
+<ol start="2">
+<li><strong>Logical-constness</strong>:  对象对外看起来不变（需要用 mutable 覆盖那些变化的成员，跳过编译检查 ）</li>
+</ol>
+</li>
+</ol>
+<p>const成员函数可以依据是否存在const约束而进行<strong>重载</strong></p>
 <p>这通常会导致代码冗余，解决办法是 非const版本调用const版本。因为const版本“外沿”更小，正确性有保障。调用时可通过const_cast&lt;.&gt;和 static_cast&lt;&gt;作变换。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBlock</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[](<span class="built_in">std</span>::<span class="keyword">size_t</span> <span class="built_in">position</span>) <span class="keyword">const</span>&#123;</span><br><span class="line">		...</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">text</span>[<span class="built_in">position</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">char</span>&amp; <span class="keyword">operator</span>[](<span class="built_in">std</span>::<span class="keyword">size_t</span> positon)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>&amp;&gt; (				<span class="comment">//移除返回值的const性质</span></span><br><span class="line">            <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> TextBlock&amp;&gt;(*<span class="keyword">this</span>) <span class="comment">//为自己添加 const属性</span></span><br><span class="line">            [<span class="built_in">position</span>]							<span class="comment">//调用常版本</span></span><br><span class="line">        );</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -229,16 +235,6 @@
 
   
   
-  <nav class="article-nav">
-    
-    
-      <a href="/2020/03/28/lang/c++/EffectiveCPP/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">EffectiveCPP 备忘Chp0</div>
-      </a>
-    
-  </nav>
-
 
   
 
