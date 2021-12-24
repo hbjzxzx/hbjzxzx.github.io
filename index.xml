@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Anubis</title>
+    <link>https://hbjzxzx.github.io/</link>
+    <description>Anubis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Dec 2021 13:31:20 +0800</lastBuildDate>
+    
+    <atom:link href="https://hbjzxzx.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Me</title>
+      <link>https://hbjzxzx.github.io/about/</link>
+      <pubDate>Fri, 24 Dec 2021 13:33:12 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/about/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;Bachelor of Software Engineer at  &lt;a href=&#34;https://en.nwpu.edu.cn/&#34;&gt;Northwestern Polytechnical University&lt;/a&gt; XiAn, CHINA&lt;/li&gt;
+&lt;li&gt;Master(In Reading) of Compute Science at &lt;a href=&#34;https://www.nuaa.edu.cn/&#34;&gt;Nanjing University of Aeronautics and Astronautics&lt;/a&gt;NanJing, CHINA&lt;/li&gt;
+&lt;li&gt;Programming Language: C, Python, Haskell, Go&lt;/li&gt;
+&lt;li&gt;Interesting in: OS Linux/Unix Graphic and Multimedia&lt;/li&gt;
+&lt;li&gt;Email:  &lt;a href=&#34;mailto:290007431@qq.com&#34;&gt;290007431@qq.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2</title>
+      <link>https://hbjzxzx.github.io/posts/2/</link>
+      <pubDate>Fri, 24 Dec 2021 13:31:20 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>1</title>
+      <link>https://hbjzxzx.github.io/posts/1/</link>
+      <pubDate>Fri, 24 Dec 2021 13:30:32 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/1/</guid>
+      <description>&lt;p&gt;test&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

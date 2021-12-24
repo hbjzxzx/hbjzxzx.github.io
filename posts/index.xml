@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Anubis</title>
+    <link>https://hbjzxzx.github.io/posts/</link>
+    <description>Anubis (Posts)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Dec 2021 13:31:20 +0800</lastBuildDate>
+    
+    <atom:link href="https://hbjzxzx.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2</title>
+      <link>https://hbjzxzx.github.io/posts/2/</link>
+      <pubDate>Fri, 24 Dec 2021 13:31:20 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>1</title>
+      <link>https://hbjzxzx.github.io/posts/1/</link>
+      <pubDate>Fri, 24 Dec 2021 13:30:32 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/1/</guid>
+      <description>&lt;p&gt;test&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
