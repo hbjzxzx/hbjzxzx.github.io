@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monad on ZhenxingXu&#39;s Personal Blog</title>
+    <link>https://hbjzxzx.github.io/tags/monad/</link>
+    <description>ZhenxingXu&#39;s Personal Blog (Monad)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Dec 2021 14:06:00 +0800</lastBuildDate>
+    
+    <atom:link href="https://hbjzxzx.github.io/tags/monad/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Monad</title>
+      <link>https://hbjzxzx.github.io/posts/haskell/monad/</link>
+      <pubDate>Fri, 24 Dec 2021 14:06:00 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/haskell/monad/</guid>
+      <description>&lt;h1 id=&#34;monad&#34;&gt;Monad&lt;/h1&gt;
+&lt;p&gt;Monad is uesed to gluing together monadic values in sequence.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Monad&lt;/span&gt; m &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	return &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m a
+	(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; m a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b
+	(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; m a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b
+	x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; y
+	fail &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In practice &lt;code&gt;do&lt;/code&gt; notaion is used to glue together several monadic values in a more readable way.&lt;/p&gt;
+&lt;p&gt;or you can use &lt;code&gt;&amp;lt;=&amp;lt;&lt;/code&gt; to combine two fucntions&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&amp;lt;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Monad&lt;/span&gt; m ) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; (b &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m c) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m c)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;examples-of-monad&#34;&gt;Examples of Monad&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Writer&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Control.Monad.Writer&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;newtype&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; w a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; {runWriter &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (a, w)}
+&lt;span style=&#34;color:#66d9ef&#34;&gt;instance&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Monoid&lt;/span&gt; w) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Monad&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; w) &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	return x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (x, mempty)
+	(&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (x, v)) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (y, v&amp;#39;)) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f x &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt;(y, v `mappend` v&amp;#39;)
+	tell m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; return &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; ((), m)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

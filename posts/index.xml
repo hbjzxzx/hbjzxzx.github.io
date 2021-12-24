@@ -1,32 +1,288 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Anubis</title>
+    <title>Posts on ZhenxingXu&#39;s Personal Blog</title>
     <link>https://hbjzxzx.github.io/posts/</link>
-    <description>Anubis (Posts)</description>
+    <description>ZhenxingXu&#39;s Personal Blog (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Dec 2021 13:31:20 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 Dec 2021 14:09:48 +0800</lastBuildDate>
     
     <atom:link href="https://hbjzxzx.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>2</title>
-      <link>https://hbjzxzx.github.io/posts/2/</link>
-      <pubDate>Fri, 24 Dec 2021 13:31:20 +0800</pubDate>
+      <title>K8s Introduce</title>
+      <link>https://hbjzxzx.github.io/posts/k8s/k8s_introduce/</link>
+      <pubDate>Fri, 24 Dec 2021 14:09:48 +0800</pubDate>
       
-      <guid>https://hbjzxzx.github.io/posts/2/</guid>
-      <description></description>
+      <guid>https://hbjzxzx.github.io/posts/k8s/k8s_introduce/</guid>
+      <description>&lt;h1 id=&#34;feature-of-k8s&#34;&gt;Feature of k8s&lt;/h1&gt;
+&lt;p&gt;Overview: managing containerized workloads and services using a declarative configuration and automation&lt;/p&gt;
+&lt;p&gt;Kubernetes provides:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Service discovery and load balancing&lt;/strong&gt;:  expose a container using the DNS name or own ip; and it can load balance the network traffic,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Storage orchestration&lt;/strong&gt;: mounts local storage system or public cloud providers and more&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automated rollouts and rollbacks&lt;/strong&gt;: you can describe the desired state for your deployed containers, k8s change the actual state to desired one at a controlled rate&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automatic bin packing&lt;/strong&gt; : k8s schedule the containerized app using declarative resource quota, such cpu, men limits&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Self-healing&lt;/strong&gt;: healthy check and auto restart&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secret and configuration management&lt;/strong&gt;: store and manage sensitive information. Deploy and udpate secrets and application configuration.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;kubernetes-components&#34;&gt;Kubernetes Components&lt;/h1&gt;
+&lt;p&gt;When you deploy Kubernetes, you get a &lt;strong&gt;cluster&lt;/strong&gt;;&lt;/p&gt;
+&lt;p&gt;A cluster consists of a set of worker machines, called &lt;strong&gt;nodes&lt;/strong&gt;, cluster has at least one worker node&lt;/p&gt;
+&lt;p&gt;A worker node host the &lt;strong&gt;Pods&lt;/strong&gt; that are the components of the application workload.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Control plane&lt;/strong&gt; control the worker &lt;strong&gt;nodes&lt;/strong&gt; and &lt;strong&gt;pods&lt;/strong&gt; in the cluster.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;High availability&lt;/strong&gt; are assured by running &lt;strong&gt;Control plane&lt;/strong&gt; cross multi host and multi host in cluster&lt;/p&gt;
+&lt;h2 id=&#34;control-plane&#34;&gt;Control plane&lt;/h2&gt;
+&lt;p&gt;control plane&amp;rsquo;s components work together to make global decisions about the cluster, as well as detecting and responding to cluster event. Its&#39; components can run on any machine in the cluster, however, they usually run on the same machine which dose not run any use containers. &lt;a href=&#34;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/&#34;&gt;Create HA Control plane&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There are 5 components in k8s&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Kube-apiserver: front end for the Kubernetes control plane, which is designed to scale horizontally.&lt;/li&gt;
+&lt;li&gt;Etc: highly-available key value store&lt;/li&gt;
+&lt;li&gt;Kube-scheduler:&lt;/li&gt;
+&lt;/ol&gt;
+</description>
     </item>
     
     <item>
-      <title>1</title>
-      <link>https://hbjzxzx.github.io/posts/1/</link>
-      <pubDate>Fri, 24 Dec 2021 13:30:32 +0800</pubDate>
+      <title>K8s Install Guide</title>
+      <link>https://hbjzxzx.github.io/posts/k8s/install_k8s/</link>
+      <pubDate>Fri, 24 Dec 2021 14:08:42 +0800</pubDate>
       
-      <guid>https://hbjzxzx.github.io/posts/1/</guid>
-      <description>&lt;p&gt;test&lt;/p&gt;
+      <guid>https://hbjzxzx.github.io/posts/k8s/install_k8s/</guid>
+      <description>&lt;h1 id=&#34;1-first-of-all-install-docker-or-you-can-use-runc-or-podman&#34;&gt;1. First of all install docker( or you can use runc or podman)&lt;/h1&gt;
+&lt;p&gt;this can be found on docker website; After you had done, the following config is needed.&lt;/p&gt;
+&lt;h2 id=&#34;config-the-cgroup&#34;&gt;config the cgroup&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# config the docker to use systemd-cgroup&lt;/span&gt;
+cat &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/docker/daemon.json
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  &amp;#34;exec-opts&amp;#34;: [&amp;#34;native.cgroupdriver=systemd&amp;#34;],
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  &amp;#34;log-driver&amp;#34;: &amp;#34;json-file&amp;#34;,
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  &amp;#34;log-opts&amp;#34;: {
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;max-size&amp;#34;: &amp;#34;100m&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  },
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  &amp;#34;storage-driver&amp;#34;: &amp;#34;overlay2&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;config-the-locations-of-docker-by-rbing&#34;&gt;config the locations of docker by rbing&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# if you had used docker, you should clean the dir&lt;/span&gt;
+sudo docker rm -f &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;; docker rmi -f &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;docker images -q&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# stop the docker&lt;/span&gt;
+sudo systemctl stop docker
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Remove the Docker storage directory&lt;/span&gt;
+sudo rm -rf /var/lib/docker
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Create a new /var/liv/docker storage directory&lt;/span&gt;
+sudo mkdir -p /var/lib/docker
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# use bind mount to set the new location.&lt;/span&gt;
+sudo mkdir /mnt/docker
+sudo mount --rbind /mnt/docker /var/lib/docker
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Start the docker service&lt;/span&gt;
+sudo systemctl start docker 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;2-install-the-kubeadm-and-kubelet&#34;&gt;2. Install the Kubeadm and Kubelet&lt;/h1&gt;
+&lt;h2 id=&#34;config-the-network&#34;&gt;Config the network&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;br_netfilter
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
+
+cat &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;net.bridge.bridge-nf-call-ip6tables = 1
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;net.bridge.bridge-nf-call-iptables = 1
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
+sudo sysctl --system
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;install-the-tools&#34;&gt;Install the tools&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# udpate dep packages&lt;/span&gt;
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# import gpg keys&lt;/span&gt;
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# config some apt sources if you needed&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# we use tsinghua and debian 9 as example&lt;/span&gt;
+echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;deb https://mirrors.tuna.tsinghua.edu.cn/kubernetes/apt  kubernetes-xenial main&amp;#34;&lt;/span&gt; | sudo tee /etc/apt/source.list.d/kubernetes.list
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# update apt then install kubectl kubeadm and kubelet&lt;/span&gt;
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+&lt;span style=&#34;color:#75715e&#34;&gt;# hold the versions to prevent the auto-update&lt;/span&gt;
+sudo apt-mark hold kubelet kubeadm kubectl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Monad</title>
+      <link>https://hbjzxzx.github.io/posts/haskell/monad/</link>
+      <pubDate>Fri, 24 Dec 2021 14:06:00 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/haskell/monad/</guid>
+      <description>&lt;h1 id=&#34;monad&#34;&gt;Monad&lt;/h1&gt;
+&lt;p&gt;Monad is uesed to gluing together monadic values in sequence.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Monad&lt;/span&gt; m &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	return &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m a
+	(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; m a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b
+	(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; m a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b
+	x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; y
+	fail &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In practice &lt;code&gt;do&lt;/code&gt; notaion is used to glue together several monadic values in a more readable way.&lt;/p&gt;
+&lt;p&gt;or you can use &lt;code&gt;&amp;lt;=&amp;lt;&lt;/code&gt; to combine two fucntions&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&amp;lt;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Monad&lt;/span&gt; m ) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; (b &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m c) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m c)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;examples-of-monad&#34;&gt;Examples of Monad&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Writer&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Control.Monad.Writer&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;newtype&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; w a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; {runWriter &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (a, w)}
+&lt;span style=&#34;color:#66d9ef&#34;&gt;instance&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Monoid&lt;/span&gt; w) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Monad&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; w) &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	return x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (x, mempty)
+	(&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (x, v)) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (y, v&amp;#39;)) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f x &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt;(y, v `mappend` v&amp;#39;)
+	tell m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; return &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; ((), m)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Functor_applicative_and_monoids</title>
+      <link>https://hbjzxzx.github.io/posts/haskell/functor_applicative_and_monoids/</link>
+      <pubDate>Fri, 24 Dec 2021 13:52:42 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/haskell/functor_applicative_and_monoids/</guid>
+      <description>&lt;h1 id=&#34;functors&#34;&gt;Functors&lt;/h1&gt;
+&lt;h2 id=&#34;sufficient-and-necessary-condition&#34;&gt;Sufficient and Necessary condition&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;it has a kind of &lt;code&gt;* -&amp;gt; *&lt;/code&gt;, which means that it accpets a concrete type and return a concrete type&lt;/li&gt;
+&lt;li&gt;it has a function &lt;code&gt;fmap :: Functor f =&amp;gt; (a -&amp;gt; b) -&amp;gt; f a -&amp;gt; f b&lt;/code&gt;
+the actually definition is:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Functor&lt;/span&gt; f &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	fmap &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f b
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;examples-of-functor&#34;&gt;Examples of Functor&lt;/h2&gt;
+&lt;p&gt;If Something is has a typeclass of Functors, it means that it can &lt;strong&gt;be mapped over&lt;/strong&gt;; &amp;ldquo;Be Mapped Over&amp;rdquo; means that
+functions out of the functors have a universal behavior of entering into the Functors.&lt;/p&gt;
+&lt;p&gt;Actually, you can think Functors as a &lt;strong&gt;&amp;lsquo;Context&amp;rsquo;&lt;/strong&gt; that wrap the real value. Context may be any thing that attached to the value,  it can be
+records which trace the inner value changes, the info which deal with the invalidate values, and the &lt;strong&gt;Side effect&lt;/strong&gt; which came long with the value.
+Here are some examples:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;List&lt;/code&gt; is a Functor: the outside function &amp;lsquo;enters&amp;rsquo; the list, then it should affect all the elements in list one by one;
+The &lt;code&gt;List&lt;/code&gt; Context can be seen as undetermined computation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmap&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; [a] &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; [b]
+&lt;span style=&#34;color:#a6e22e&#34;&gt;fmap&lt;/span&gt; f axs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [f a &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt; axs]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;Maybe&lt;/code&gt; Maybe Functor: the outside function &amp;lsquo;enters&amp;rsquo; the Maybe functor, then it get the ability of handing invalidated value.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmap&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Maybe&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Maybe&lt;/span&gt; b
+&lt;span style=&#34;color:#a6e22e&#34;&gt;fmap&lt;/span&gt; f mayA &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; mayA &lt;span style=&#34;color:#66d9ef&#34;&gt;of&lt;/span&gt;
+	(&lt;span style=&#34;color:#66d9ef&#34;&gt;Just&lt;/span&gt; a) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Just&lt;/span&gt; (f a)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;Nothing&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Nothing&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;code&gt;IO&lt;/code&gt; IO Functor: the &lt;code&gt;IO&lt;/code&gt; wraps the computation with &lt;strong&gt;Side effect&lt;/strong&gt;, this means that you can never extra a value out of Context in Haskell just like the &lt;code&gt;List&lt;/code&gt; and &lt;code&gt;Maybe&lt;/code&gt;; But you can use the &lt;code&gt;fmap&lt;/code&gt; or &lt;code&gt;do&lt;/code&gt; notaion.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;	fmap &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;IO&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;IO&lt;/span&gt; b
+	fmap f action &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt;
+		result &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt; action
+		return (f result)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;code&gt;(-&amp;gt;)r&lt;/code&gt; Computation functor: Maybe functor can be viewed as the container, in which the value just stay there. However the &lt;code&gt;(-&amp;gt;)r&lt;/code&gt; is close to &lt;code&gt;IO&lt;/code&gt;, both of which will do something perform to get the final value. The value in computaion functor.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- in Control.Monad.Instance&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Functor&lt;/span&gt; ((&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;) r) &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	fmap f g &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f (g x))
+&lt;span style=&#34;color:#75715e&#34;&gt;-- or you can&lt;/span&gt;
+	fmap f g &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;law-of-functor&#34;&gt;Law of Functor&lt;/h2&gt;
+&lt;p&gt;All functors have method: &lt;code&gt;fmap :: (a-&amp;gt;b) -&amp;gt; f a -&amp;gt; f b&lt;/code&gt;, which can  be curried as &lt;code&gt;fmap oridinary_f :: f a -&amp;gt; f b&lt;/code&gt;. It seems as if the &lt;code&gt;oridinary_f&lt;/code&gt; has been &lt;strong&gt;lifted&lt;/strong&gt; to some functor context. To keep the semantic of &lt;strong&gt;lifting function&lt;/strong&gt;, the functor should keep two laws:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;fmap id = id&lt;/code&gt; &amp;mdash;&amp;gt;  id function holds after mapping&lt;/li&gt;
+&lt;li&gt;`fmap (f . g) = (fmap f).(fmap g) &amp;mdash;&amp;gt; compositional order holds after mapping&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;application-functors&#34;&gt;Application functors&lt;/h1&gt;
+&lt;p&gt;We say that functors are some context that holds or computes the final value, and &lt;code&gt;fmap&lt;/code&gt; can lift the trivial function into that context. The signature: &lt;code&gt;fmap :: (a-&amp;gt;b) -&amp;gt; f a -&amp;gt; f b&lt;/code&gt; means that only unary functions can be lifted, how about functions whose number of parameters is more than 2?&lt;/p&gt;
+&lt;p&gt;Thanks to curried function or partially apply function, all the functions can be viewed as unary operator. So if we use &lt;code&gt;fmap (*) (Just 3)&lt;/code&gt;, we get &lt;code&gt;Just (* 3)&lt;/code&gt; which is actually a function in Maybe functor. Application can let these functions wrapped by context keep go working under context.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- in Control.Applicative&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Functor&lt;/span&gt; f) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Applicative&lt;/span&gt; f &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	pure &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f a
+	(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;*&amp;gt;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; f (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f b
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;pure (+) &amp;lt;*&amp;gt; (Just 1) &amp;lt;*&amp;gt; (Just 1)&lt;/code&gt; will eval to &lt;code&gt;Just 2&lt;/code&gt;, There is a syntax sugar to avoid using pure.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;$&amp;gt;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Functor&lt;/span&gt; f) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f b
+&lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;$&amp;gt;&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fmap f x
+&lt;span style=&#34;color:#f92672&#34;&gt;##&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Examples&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;of&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Applicative&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;List&lt;/span&gt;
+```haskell
+&lt;span style=&#34;color:#66d9ef&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Applicative&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	pure x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x]
+	fs &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;*&amp;gt;&lt;/span&gt; xs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [f x &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt; fs, x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt; xs]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;(-&amp;gt;)r&lt;/code&gt;: form the follwing definition we find that some evaluation ordered are defined in computation context.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Applicative&lt;/span&gt; ((&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;)r) &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	pure x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; x)
+	&lt;span style=&#34;color:#75715e&#34;&gt;-- fist f will be evaluated to get the functions&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;-- then g will be evaluated to get the values&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;-- apply the function and value&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;-- use lambda to wrap the result&lt;/span&gt;
+	f &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;*&amp;gt;&lt;/span&gt; g &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f x (g x)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;ZipList: another context meaning of List functor&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Applicative&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ZipList&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;-- value will wrap into a infinite list	&lt;/span&gt;
+	pure x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ZipList&lt;/span&gt; (repeat x)
+	&lt;span style=&#34;color:#75715e&#34;&gt;-- using the bitwise style to handle List Context&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;ZipList&lt;/span&gt; fs &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;*&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ZipList&lt;/span&gt; xs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ZipList&lt;/span&gt;(zipWith (&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;f x &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f x) fs xs)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;useful-functions-about-applicative&#34;&gt;Useful functions about Applicative&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;liftA2&lt;/code&gt;: list a binary function into applicative&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;liftA2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Applicative&lt;/span&gt; f) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; c) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f b &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f c
+&lt;span style=&#34;color:#a6e22e&#34;&gt;liftA2&lt;/span&gt; f a b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;$&amp;gt;&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;*&amp;gt;&lt;/span&gt; b
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;sequenceA&lt;/code&gt;: Combine any amount of applicatives into one applicative that has a list of the results of those applicatives inside it.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;sequenceA&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Applicative&lt;/span&gt; f) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [f a] &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; f [a]
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sequenceA&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pure &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sequenceA&lt;/span&gt; (x&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt; xs) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;$&amp;gt;&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;$&amp;gt;&lt;/span&gt; sequenceA xs
+&lt;span style=&#34;color:#75715e&#34;&gt;-- with the help of liftA2&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sequenceA&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; foldr (liftA2 (&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;)) (pure &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;law-of-applicative&#34;&gt;Law of Applicative&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pure f &amp;lt;*&amp;gt; x = fmap f x&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pure id &amp;lt;*&amp;gt; v = fmap id v = v&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pure (.) &amp;lt;*&amp;gt; u &amp;lt;*&amp;gt; v &amp;lt;*&amp;gt; w = u &amp;lt;*&amp;gt; (v &amp;lt;*&amp;gt; w)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pure f &amp;lt;*&amp;gt; pure x = pure (f x)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;u &amp;lt;*&amp;gt; pure y = pure ($ y) &amp;lt;*&amp;gt; u &lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;monoids&#34;&gt;Monoids&lt;/h1&gt;
+&lt;p&gt;A monoid is a semi-group with an identity element.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Monoid&lt;/span&gt; m &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	mempty &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; m
+	mappend &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m
+	mconcat &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; [m] &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; m
+	moncat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; foldr mappend mempty
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;examples-of-monoids&#34;&gt;Examples of Monoids&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;List&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Monoid&lt;/span&gt; [a] &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt;
+	mempty &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt;
+	mappend &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Product and Sum, Any and All&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;newtype&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Product&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {getProduct &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; a}
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;deriving&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Eq&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;Ord&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;Read&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;Show&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;Bounded&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Num&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Monoid&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Product&lt;/span&gt; a) &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt; 
+	mempty &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Product&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;Product&lt;/span&gt; x `mappend` &lt;span style=&#34;color:#66d9ef&#34;&gt;Product&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Product&lt;/span&gt; (x &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; y)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Ordering Monoid&lt;/li&gt;
+&lt;/ol&gt;
 </description>
     </item>
     

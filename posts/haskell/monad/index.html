@@ -10,9 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>About Me - ZhenxingXu&#39;s Personal Blog</title>
+<title>Monad - ZhenxingXu&#39;s Personal Blog</title>
 
-<meta name="description" content=" Bachelor of Software Engineer at Northwestern Polytechnical University XiAn, CHINA Master(In Reading) of Compute Science at Nanjing University of Aeronautics and AstronauticsNanJing, CHINA Programming Language: C, Python, Haskell, Go Interesting in: OS Linux/Unix Graphic and Multimedia Email: 290007431@qq.com  ">
+<meta name="description" content="Monad introduce">
 
 <link rel="icon" type="image/x-icon" href="https://hbjzxzx.github.io/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="https://hbjzxzx.github.io/favicon.png">
@@ -40,17 +40,17 @@
 
 
 
-<meta property="og:title" content="About Me" />
-<meta property="og:description" content=" Bachelor of Software Engineer at Northwestern Polytechnical University XiAn, CHINA Master(In Reading) of Compute Science at Nanjing University of Aeronautics and AstronauticsNanJing, CHINA Programming Language: C, Python, Haskell, Go Interesting in: OS Linux/Unix Graphic and Multimedia Email: 290007431@qq.com  " />
+<meta property="og:title" content="Monad" />
+<meta property="og:description" content="Monad introduce" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://hbjzxzx.github.io/about/" /><meta property="article:section" content="" />
-<meta property="article:published_time" content="2021-12-24T13:33:12+08:00" />
-<meta property="article:modified_time" content="2021-12-24T13:33:12+08:00" />
+<meta property="og:url" content="https://hbjzxzx.github.io/posts/haskell/monad/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-24T14:06:00+08:00" />
+<meta property="article:modified_time" content="2021-12-24T14:06:00+08:00" />
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="About Me"/>
-<meta name="twitter:description" content=" Bachelor of Software Engineer at Northwestern Polytechnical University XiAn, CHINA Master(In Reading) of Compute Science at Nanjing University of Aeronautics and AstronauticsNanJing, CHINA Programming Language: C, Python, Haskell, Go Interesting in: OS Linux/Unix Graphic and Multimedia Email: 290007431@qq.com  "/>
+<meta name="twitter:title" content="Monad"/>
+<meta name="twitter:description" content="Monad introduce"/>
 
 
 
@@ -164,20 +164,34 @@ if (!doNotTrack) {
     <article class="post h-entry">
         <div class="post-header">
             <header>
-                <h1 class="p-name post-title">About Me</h1>
+                <h1 class="p-name post-title">Monad</h1>
 
                 
             </header>
         </div>
         <div class="content e-content">
-            <ul>
-<li>Bachelor of Software Engineer at  <a href="https://en.nwpu.edu.cn/">Northwestern Polytechnical University</a> XiAn, CHINA</li>
-<li>Master(In Reading) of Compute Science at <a href="https://www.nuaa.edu.cn/">Nanjing University of Aeronautics and Astronautics</a>NanJing, CHINA</li>
-<li>Programming Language: C, Python, Haskell, Go</li>
-<li>Interesting in: OS Linux/Unix Graphic and Multimedia</li>
-<li>Email:  <a href="mailto:290007431@qq.com">290007431@qq.com</a></li>
-</ul>
-
+            <h1 id="monad">Monad</h1>
+<p>Monad is uesed to gluing together monadic values in sequence.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">class</span> <span style="color:#66d9ef">Monad</span> m <span style="color:#66d9ef">where</span>
+	return <span style="color:#f92672">::</span> a <span style="color:#f92672">-&gt;</span> m a
+	(<span style="color:#f92672">&gt;&gt;=</span>) <span style="color:#f92672">::</span> m a <span style="color:#f92672">-&gt;</span> (a <span style="color:#f92672">-&gt;</span> m b) <span style="color:#f92672">-&gt;</span> m b
+	(<span style="color:#f92672">&gt;&gt;</span>) <span style="color:#f92672">::</span> m a <span style="color:#f92672">-&gt;</span> m b <span style="color:#f92672">-&gt;</span> m b
+	x <span style="color:#f92672">&gt;&gt;</span> y <span style="color:#f92672">=</span> x <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#a6e22e">\</span><span style="color:#66d9ef">_</span> <span style="color:#f92672">-&gt;</span> y
+	fail <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> m a
+</code></pre></div><p>In practice <code>do</code> notaion is used to glue together several monadic values in a more readable way.</p>
+<p>or you can use <code>&lt;=&lt;</code> to combine two fucntions</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">(<span style="color:#f92672">&lt;=&lt;</span>) <span style="color:#f92672">::</span> (<span style="color:#66d9ef">Monad</span> m ) <span style="color:#f92672">=&gt;</span> (b <span style="color:#f92672">-&gt;</span> m c) <span style="color:#f92672">-&gt;</span> (a <span style="color:#f92672">-&gt;</span> m b) <span style="color:#f92672">-&gt;</span> (a <span style="color:#f92672">-&gt;</span> m c)
+</code></pre></div><h2 id="examples-of-monad">Examples of Monad</h2>
+<ol>
+<li><code>Writer</code></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- Control.Monad.Writer</span>
+<span style="color:#66d9ef">newtype</span> <span style="color:#66d9ef">Writer</span> w a <span style="color:#f92672">=</span> <span style="color:#66d9ef">Writer</span> {runWriter <span style="color:#f92672">::</span> (a, w)}
+<span style="color:#66d9ef">instance</span> (<span style="color:#66d9ef">Monoid</span> w) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">Monad</span> (<span style="color:#66d9ef">Writer</span> w) <span style="color:#66d9ef">where</span>
+	return x <span style="color:#f92672">=</span> <span style="color:#66d9ef">Writer</span> (x, mempty)
+	(<span style="color:#66d9ef">Writer</span> (x, v)) <span style="color:#f92672">&gt;&gt;=</span> f <span style="color:#f92672">=</span> <span style="color:#66d9ef">let</span> (<span style="color:#66d9ef">Writer</span> (y, v&#39;)) <span style="color:#f92672">=</span> f x <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">Writer</span>(y, v `mappend` v&#39;)
+	tell m <span style="color:#f92672">=</span> return <span style="color:#66d9ef">Writer</span> ((), m)
+</code></pre></div>
         </div>
         
 
@@ -189,17 +203,43 @@ if (!doNotTrack) {
         <div class="post-date dt-published">2021-12-24</div>
     
 
-    <a class="post-hidden-url u-url" href="https://hbjzxzx.github.io/about/">https://hbjzxzx.github.io/about/</a>
+    <a class="post-hidden-url u-url" href="https://hbjzxzx.github.io/posts/haskell/monad/">https://hbjzxzx.github.io/posts/haskell/monad/</a>
     <a href="https://hbjzxzx.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">zhenxingxu</a>
 
 
     <div class="post-taxonomies">
         
             
+                <ul class="post-tags">
+                    
+                        <li><a href="https://hbjzxzx.github.io/tags/haskell">#haskell</a></li>
+                    
+                        <li><a href="https://hbjzxzx.github.io/tags/monad">#Monad</a></li>
+                    
+                </ul>
+        
     </div>
 </div>
 
     </article>
+
+    
+        
+    <div class="pagination post-pagination">
+        <div class="left pagination-item ">
+            
+                <a href="/posts/k8s/install_k8s/">K8s Install Guide</a>
+            
+        </div>
+        <div class="right pagination-item ">
+            
+                <a href="/posts/haskell/functor_applicative_and_monoids/">Functor_applicative_and_monoids</a>
+            
+        </div>
+    </div>
+
+
+
 
     
 

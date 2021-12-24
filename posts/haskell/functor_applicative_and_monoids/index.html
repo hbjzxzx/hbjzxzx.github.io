@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Functor_applicative_and_monoids - ZhenxingXu&#39;s Personal Blog</title>
+
+<meta name="description" content="defines of functor,applicative and monoid is haskell">
+
+<link rel="icon" type="image/x-icon" href="https://hbjzxzx.github.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://hbjzxzx.github.io/favicon.png">
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://hbjzxzx.github.io/css/style.min.6ac60a5750c9093c0f98296dd42340155734a3bd2765c6bcd875575674194472.css" integrity="sha256-asYKV1DJCTwPmClt1CNAFVc0o70nZca82HVXVnQZRHI=">
+    
+
+
+
+
+
+
+<meta property="og:title" content="Functor_applicative_and_monoids" />
+<meta property="og:description" content="defines of functor,applicative and monoid is haskell" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hbjzxzx.github.io/posts/haskell/functor_applicative_and_monoids/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-24T13:52:42+08:00" />
+<meta property="article:modified_time" content="2021-12-24T13:52:42+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Functor_applicative_and_monoids"/>
+<meta name="twitter:description" content="defines of functor,applicative and monoid is haskell"/>
+
+
+
+    
+        <link rel="webmention" href="https://webmention.io/hugo-theme-anubis/webmention" />
+        
+            <link rel="pingback" href="https://webmention.io/hugo-theme-anubis/xmlrpc" />
+        
+    
+    
+        <link rel="webmention" href="https://yourdomain.com/webemntions/receive" />
+    
+
+
+
+
+
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ9EVSJ4EC"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GZ9EVSJ4EC', { 'anonymize_ip': false });
+}
+</script>
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+        <a href="/">ZhenxingXu&#39;s Personal Blog</a>
+    </h1>
+    <ul class="social-icons">
+
+
+    
+        
+        
+        <li>
+            <a href="https://github.com/gohugoio" title="Github" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+    
+        
+        
+        <li>
+            <a href="mailto:290007431@qq.com" title="Email" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+</ul>
+
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://hbjzxzx.github.io/about/" title="">About Me</a>
+        
+        <a class="" href="https://hbjzxzx.github.io/tags/" title="">Tags</a>
+        
+        <a class="" href="https://hbjzxzx.github.io/posts/" title="Archive">Archive</a>
+        
+    </nav>
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">Functor_applicative_and_monoids</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <h1 id="functors">Functors</h1>
+<h2 id="sufficient-and-necessary-condition">Sufficient and Necessary condition</h2>
+<ol>
+<li>it has a kind of <code>* -&gt; *</code>, which means that it accpets a concrete type and return a concrete type</li>
+<li>it has a function <code>fmap :: Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b</code>
+the actually definition is:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">class</span> <span style="color:#66d9ef">Functor</span> f <span style="color:#66d9ef">where</span>
+	fmap <span style="color:#f92672">::</span> (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> f a <span style="color:#f92672">-&gt;</span> f b
+</code></pre></div><h2 id="examples-of-functor">Examples of Functor</h2>
+<p>If Something is has a typeclass of Functors, it means that it can <strong>be mapped over</strong>; &ldquo;Be Mapped Over&rdquo; means that
+functions out of the functors have a universal behavior of entering into the Functors.</p>
+<p>Actually, you can think Functors as a <strong>&lsquo;Context&rsquo;</strong> that wrap the real value. Context may be any thing that attached to the value,  it can be
+records which trace the inner value changes, the info which deal with the invalidate values, and the <strong>Side effect</strong> which came long with the value.
+Here are some examples:</p>
+<ol>
+<li><code>List</code> is a Functor: the outside function &lsquo;enters&rsquo; the list, then it should affect all the elements in list one by one;
+The <code>List</code> Context can be seen as undetermined computation.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">fmap</span> <span style="color:#f92672">::</span> (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> [a] <span style="color:#f92672">-&gt;</span> [b]
+<span style="color:#a6e22e">fmap</span> f axs <span style="color:#f92672">=</span> [f a <span style="color:#f92672">|</span> a <span style="color:#f92672">&lt;-</span> axs]
+</code></pre></div><ol start="2">
+<li><code>Maybe</code> Maybe Functor: the outside function &lsquo;enters&rsquo; the Maybe functor, then it get the ability of handing invalidated value.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">fmap</span> <span style="color:#f92672">::</span> (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Maybe</span> a <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Maybe</span> b
+<span style="color:#a6e22e">fmap</span> f mayA <span style="color:#f92672">=</span> <span style="color:#66d9ef">case</span> mayA <span style="color:#66d9ef">of</span>
+	(<span style="color:#66d9ef">Just</span> a) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Just</span> (f a)
+	<span style="color:#66d9ef">Nothing</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Nothing</span>
+</code></pre></div><ol start="3">
+<li><code>IO</code> IO Functor: the <code>IO</code> wraps the computation with <strong>Side effect</strong>, this means that you can never extra a value out of Context in Haskell just like the <code>List</code> and <code>Maybe</code>; But you can use the <code>fmap</code> or <code>do</code> notaion.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">	fmap <span style="color:#f92672">::</span> (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> a <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> b
+	fmap f action <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+		result <span style="color:#f92672">&lt;-</span> action
+		return (f result)
+</code></pre></div><ol start="4">
+<li><code>(-&gt;)r</code> Computation functor: Maybe functor can be viewed as the container, in which the value just stay there. However the <code>(-&gt;)r</code> is close to <code>IO</code>, both of which will do something perform to get the final value. The value in computaion functor.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- in Control.Monad.Instance</span>
+<span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Functor</span> ((<span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span>) r) <span style="color:#66d9ef">where</span>
+	fmap f g <span style="color:#f92672">=</span> (<span style="color:#a6e22e">\</span>x <span style="color:#f92672">-&gt;</span> f (g x))
+<span style="color:#75715e">-- or you can</span>
+	fmap f g <span style="color:#f92672">=</span> (<span style="color:#f92672">.</span>)
+
+</code></pre></div><h2 id="law-of-functor">Law of Functor</h2>
+<p>All functors have method: <code>fmap :: (a-&gt;b) -&gt; f a -&gt; f b</code>, which can  be curried as <code>fmap oridinary_f :: f a -&gt; f b</code>. It seems as if the <code>oridinary_f</code> has been <strong>lifted</strong> to some functor context. To keep the semantic of <strong>lifting function</strong>, the functor should keep two laws:</p>
+<ol>
+<li><code>fmap id = id</code> &mdash;&gt;  id function holds after mapping</li>
+<li>`fmap (f . g) = (fmap f).(fmap g) &mdash;&gt; compositional order holds after mapping</li>
+</ol>
+<h1 id="application-functors">Application functors</h1>
+<p>We say that functors are some context that holds or computes the final value, and <code>fmap</code> can lift the trivial function into that context. The signature: <code>fmap :: (a-&gt;b) -&gt; f a -&gt; f b</code> means that only unary functions can be lifted, how about functions whose number of parameters is more than 2?</p>
+<p>Thanks to curried function or partially apply function, all the functions can be viewed as unary operator. So if we use <code>fmap (*) (Just 3)</code>, we get <code>Just (* 3)</code> which is actually a function in Maybe functor. Application can let these functions wrapped by context keep go working under context.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- in Control.Applicative</span>
+<span style="color:#66d9ef">class</span> (<span style="color:#66d9ef">Functor</span> f) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">Applicative</span> f <span style="color:#66d9ef">where</span>
+	pure <span style="color:#f92672">::</span> a <span style="color:#f92672">-&gt;</span> f a
+	(<span style="color:#f92672">&lt;*&gt;</span>) <span style="color:#f92672">::</span> f (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> f a <span style="color:#f92672">-&gt;</span> f b
+</code></pre></div><p><code>pure (+) &lt;*&gt; (Just 1) &lt;*&gt; (Just 1)</code> will eval to <code>Just 2</code>, There is a syntax sugar to avoid using pure.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">(<span style="color:#f92672">&lt;$&gt;</span>) <span style="color:#f92672">::</span> (<span style="color:#66d9ef">Functor</span> f) <span style="color:#f92672">=&gt;</span> (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> f a <span style="color:#f92672">-&gt;</span> f b
+<span style="color:#a6e22e">f</span> <span style="color:#f92672">&lt;$&gt;</span> x <span style="color:#f92672">=</span> fmap f x
+<span style="color:#f92672">##</span> <span style="color:#66d9ef">Examples</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">Applicative</span>
+<span style="color:#ae81ff">1</span><span style="color:#f92672">.</span> <span style="color:#66d9ef">List</span>
+```haskell
+<span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Applicative</span> <span style="color:#66d9ef">[]</span> <span style="color:#66d9ef">where</span>
+	pure x <span style="color:#f92672">=</span> [x]
+	fs <span style="color:#f92672">&lt;*&gt;</span> xs <span style="color:#f92672">=</span> [f x <span style="color:#f92672">|</span> f <span style="color:#f92672">&lt;-</span> fs, x <span style="color:#f92672">&lt;-</span> xs]
+</code></pre></div><ol start="2">
+<li><code>(-&gt;)r</code>: form the follwing definition we find that some evaluation ordered are defined in computation context.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Applicative</span> ((<span style="color:#f92672">-&gt;</span>)r) <span style="color:#66d9ef">where</span>
+	pure x <span style="color:#f92672">=</span> (<span style="color:#a6e22e">\</span><span style="color:#66d9ef">_</span> <span style="color:#f92672">-&gt;</span> x)
+	<span style="color:#75715e">-- fist f will be evaluated to get the functions</span>
+	<span style="color:#75715e">-- then g will be evaluated to get the values</span>
+	<span style="color:#75715e">-- apply the function and value</span>
+	<span style="color:#75715e">-- use lambda to wrap the result</span>
+	f <span style="color:#f92672">&lt;*&gt;</span> g <span style="color:#f92672">=</span> <span style="color:#a6e22e">\</span>x <span style="color:#f92672">-&gt;</span> f x (g x)
+</code></pre></div><ol start="3">
+<li>ZipList: another context meaning of List functor</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Applicative</span> <span style="color:#66d9ef">ZipList</span> <span style="color:#66d9ef">where</span>
+	<span style="color:#75715e">-- value will wrap into a infinite list	</span>
+	pure x <span style="color:#f92672">=</span> <span style="color:#66d9ef">ZipList</span> (repeat x)
+	<span style="color:#75715e">-- using the bitwise style to handle List Context</span>
+	<span style="color:#66d9ef">ZipList</span> fs <span style="color:#f92672">&lt;*&gt;</span> <span style="color:#66d9ef">ZipList</span> xs <span style="color:#f92672">=</span> <span style="color:#66d9ef">ZipList</span>(zipWith (<span style="color:#a6e22e">\</span>f x <span style="color:#f92672">-&gt;</span> f x) fs xs)
+</code></pre></div><h2 id="useful-functions-about-applicative">Useful functions about Applicative</h2>
+<ol>
+<li><code>liftA2</code>: list a binary function into applicative</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">liftA2</span> <span style="color:#f92672">::</span> (<span style="color:#66d9ef">Applicative</span> f) <span style="color:#f92672">=&gt;</span> (a <span style="color:#f92672">-&gt;</span> b <span style="color:#f92672">-&gt;</span> c) <span style="color:#f92672">-&gt;</span> f a <span style="color:#f92672">-&gt;</span> f b <span style="color:#f92672">-&gt;</span> f c
+<span style="color:#a6e22e">liftA2</span> f a b <span style="color:#f92672">=</span> f <span style="color:#f92672">&lt;$&gt;</span> a <span style="color:#f92672">&lt;*&gt;</span> b
+</code></pre></div><ol start="2">
+<li><code>sequenceA</code>: Combine any amount of applicatives into one applicative that has a list of the results of those applicatives inside it.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">sequenceA</span> <span style="color:#f92672">::</span> (<span style="color:#66d9ef">Applicative</span> f) <span style="color:#f92672">=&gt;</span> [f a] <span style="color:#f92672">-&gt;</span> f [a]
+<span style="color:#a6e22e">sequenceA</span> <span style="color:#66d9ef">[]</span> <span style="color:#f92672">=</span> pure <span style="color:#66d9ef">[]</span>
+<span style="color:#a6e22e">sequenceA</span> (x<span style="color:#66d9ef">:</span> xs) <span style="color:#f92672">=</span> (<span style="color:#66d9ef">:</span>) <span style="color:#f92672">&lt;$&gt;</span> x <span style="color:#f92672">&lt;$&gt;</span> sequenceA xs
+<span style="color:#75715e">-- with the help of liftA2</span>
+<span style="color:#a6e22e">sequenceA</span> <span style="color:#f92672">=</span> foldr (liftA2 (<span style="color:#66d9ef">:</span>)) (pure <span style="color:#66d9ef">[]</span>)
+</code></pre></div><h2 id="law-of-applicative">Law of Applicative</h2>
+<ul>
+<li><code>pure f &lt;*&gt; x = fmap f x</code></li>
+<li><code>pure id &lt;*&gt; v = fmap id v = v</code></li>
+<li><code>pure (.) &lt;*&gt; u &lt;*&gt; v &lt;*&gt; w = u &lt;*&gt; (v &lt;*&gt; w)</code></li>
+<li><code>pure f &lt;*&gt; pure x = pure (f x)</code></li>
+<li><code>u &lt;*&gt; pure y = pure ($ y) &lt;*&gt; u </code></li>
+</ul>
+<h1 id="monoids">Monoids</h1>
+<p>A monoid is a semi-group with an identity element.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">class</span> <span style="color:#66d9ef">Monoid</span> m <span style="color:#66d9ef">where</span>
+	mempty <span style="color:#f92672">::</span> m
+	mappend <span style="color:#f92672">::</span> m <span style="color:#f92672">-&gt;</span> m <span style="color:#f92672">-&gt;</span> m
+	mconcat <span style="color:#f92672">::</span> [m] <span style="color:#f92672">-&gt;</span> m
+	moncat <span style="color:#f92672">=</span> foldr mappend mempty
+</code></pre></div><h2 id="examples-of-monoids">Examples of Monoids</h2>
+<ol>
+<li>List</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Monoid</span> [a] <span style="color:#66d9ef">where</span>
+	mempty <span style="color:#66d9ef">[]</span>
+	mappend <span style="color:#f92672">=</span> (<span style="color:#f92672">++</span>)
+</code></pre></div><ol start="2">
+<li>Product and Sum, Any and All</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">newtype</span> <span style="color:#66d9ef">Product</span> a <span style="color:#f92672">=</span> {getProduct <span style="color:#f92672">::</span> a}
+	<span style="color:#66d9ef">deriving</span> (<span style="color:#66d9ef">Eq</span>, <span style="color:#66d9ef">Ord</span>, <span style="color:#66d9ef">Read</span>, <span style="color:#66d9ef">Show</span>, <span style="color:#66d9ef">Bounded</span>)
+
+<span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Num</span> a <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">Monoid</span> (<span style="color:#66d9ef">Product</span> a) <span style="color:#66d9ef">where</span> 
+	mempty <span style="color:#f92672">=</span> <span style="color:#66d9ef">Product</span> <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">Product</span> x `mappend` <span style="color:#66d9ef">Product</span> y <span style="color:#f92672">=</span> <span style="color:#66d9ef">Product</span> (x <span style="color:#f92672">*</span> y)
+</code></pre></div><ol start="3">
+<li>Ordering Monoid</li>
+</ol>
+
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+        <div class="post-date dt-published">2021-12-24</div>
+    
+
+    <a class="post-hidden-url u-url" href="https://hbjzxzx.github.io/posts/haskell/functor_applicative_and_monoids/">https://hbjzxzx.github.io/posts/haskell/functor_applicative_and_monoids/</a>
+    <a href="https://hbjzxzx.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">zhenxingxu</a>
+
+
+    <div class="post-taxonomies">
+        
+            
+                <ul class="post-tags">
+                    
+                        <li><a href="https://hbjzxzx.github.io/tags/haskell">#haskell</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+    </article>
+
+    
+        
+    <div class="pagination post-pagination">
+        <div class="left pagination-item ">
+            
+                <a href="/posts/haskell/monad/">Monad</a>
+            
+        </div>
+        <div class="right pagination-item disabled">
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "github_page_blog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    
+
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© zhenxingxu, 2021<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://hbjzxzx.github.io/ class="p-name u-url url fn" rel="me">zhenxingxu</a> 
+
+     
+        /
+        <a class="p-email u-email email" rel="me" href="mailto:290007431@qq.com">290007431@qq.com</a>
+    
+
+     
+        <img class="u-photo" src="/images/me.png" />
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>
