@@ -10,9 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>K8s Introduce - ZhenxingXu&#39;s Personal Blog</title>
+<title>Introduce - ZhenxingXu&#39;s Personal Blog</title>
 
-<meta name="description" content="k8s introduce">
+<meta name="description" content="Target of distributed system  Parallelism(Perfermance) Fault tolerance Physical distributed security/isolated  challenge  concurrency partial failure perfermance  example MapReduce MapReduce: Simplified Data Processing on Large Clusters A new abstraction that allow us to express the simple computations we were trying to perform but hides the messy details of parallelization, fault-tolerance, data distribution and load balancing. This abstraction is inspired by the map and reduce primitives present in Lisp and many other functional language.">
 
 <link rel="icon" type="image/x-icon" href="https://hbjzxzx.github.io/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="https://hbjzxzx.github.io/favicon.png">
@@ -40,17 +40,17 @@
 
 
 
-<meta property="og:title" content="K8s Introduce" />
-<meta property="og:description" content="k8s introduce" />
+<meta property="og:title" content="Introduce" />
+<meta property="og:description" content="Target of distributed system  Parallelism(Perfermance) Fault tolerance Physical distributed security/isolated  challenge  concurrency partial failure perfermance  example MapReduce MapReduce: Simplified Data Processing on Large Clusters A new abstraction that allow us to express the simple computations we were trying to perform but hides the messy details of parallelization, fault-tolerance, data distribution and load balancing. This abstraction is inspired by the map and reduce primitives present in Lisp and many other functional language." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://hbjzxzx.github.io/posts/k8s/k8s_introduce/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-12-24T14:09:48+08:00" />
-<meta property="article:modified_time" content="2021-12-24T14:09:48+08:00" />
+<meta property="og:url" content="https://hbjzxzx.github.io/posts/distr_sys/introduce/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-26T11:42:20+08:00" />
+<meta property="article:modified_time" content="2021-12-26T11:42:20+08:00" />
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="K8s Introduce"/>
-<meta name="twitter:description" content="k8s introduce"/>
+<meta name="twitter:title" content="Introduce"/>
+<meta name="twitter:description" content="Target of distributed system  Parallelism(Perfermance) Fault tolerance Physical distributed security/isolated  challenge  concurrency partial failure perfermance  example MapReduce MapReduce: Simplified Data Processing on Large Clusters A new abstraction that allow us to express the simple computations we were trying to perform but hides the messy details of parallelization, fault-tolerance, data distribution and load balancing. This abstraction is inspired by the map and reduce primitives present in Lisp and many other functional language."/>
 
 
 
@@ -164,37 +164,29 @@ if (!doNotTrack) {
     <article class="post h-entry">
         <div class="post-header">
             <header>
-                <h1 class="p-name post-title">K8s Introduce</h1>
+                <h1 class="p-name post-title draft">Introduce</h1>
 
                 
             </header>
         </div>
         <div class="content e-content">
-            <h1 id="feature-of-k8s">Feature of k8s</h1>
-<p>Overview: managing containerized workloads and services using a declarative configuration and automation</p>
-<p>Kubernetes provides:</p>
+            <h1 id="target-of-distributed-system">Target of distributed system</h1>
 <ol>
-<li><strong>Service discovery and load balancing</strong>:  expose a container using the DNS name or own ip; and it can load balance the network traffic,</li>
-<li><strong>Storage orchestration</strong>: mounts local storage system or public cloud providers and more</li>
-<li><strong>Automated rollouts and rollbacks</strong>: you can describe the desired state for your deployed containers, k8s change the actual state to desired one at a controlled rate</li>
-<li><strong>Automatic bin packing</strong> : k8s schedule the containerized app using declarative resource quota, such cpu, men limits</li>
-<li><strong>Self-healing</strong>: healthy check and auto restart</li>
-<li><strong>Secret and configuration management</strong>: store and manage sensitive information. Deploy and udpate secrets and application configuration.</li>
+<li>Parallelism(Perfermance)</li>
+<li>Fault tolerance</li>
+<li>Physical distributed</li>
+<li>security/isolated</li>
 </ol>
-<h1 id="kubernetes-components">Kubernetes Components</h1>
-<p>When you deploy Kubernetes, you get a <strong>cluster</strong>;</p>
-<p>A cluster consists of a set of worker machines, called <strong>nodes</strong>, cluster has at least one worker node</p>
-<p>A worker node host the <strong>Pods</strong> that are the components of the application workload.</p>
-<p>The <strong>Control plane</strong> control the worker <strong>nodes</strong> and <strong>pods</strong> in the cluster.</p>
-<p><strong>High availability</strong> are assured by running <strong>Control plane</strong> cross multi host and multi host in cluster</p>
-<h2 id="control-plane">Control plane</h2>
-<p>control plane&rsquo;s components work together to make global decisions about the cluster, as well as detecting and responding to cluster event. Its' components can run on any machine in the cluster, however, they usually run on the same machine which dose not run any use containers. <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/">Create HA Control plane</a></p>
-<p>There are 5 components in k8s</p>
+<h1 id="challenge">challenge</h1>
 <ol>
-<li>Kube-apiserver: front end for the Kubernetes control plane, which is designed to scale horizontally.</li>
-<li>Etc: highly-available key value store</li>
-<li>Kube-scheduler:</li>
+<li>concurrency</li>
+<li>partial failure</li>
+<li>perfermance</li>
 </ol>
+<h1 id="example-mapreduce">example MapReduce</h1>
+<h2 id="mapreduce-simplified-data-processing-on-large-clusters">MapReduce: Simplified Data Processing on Large Clusters</h2>
+<p>A new abstraction that allow us to express the simple computations we were trying to perform but hides the messy details of parallelization, fault-tolerance, data distribution and load balancing.
+This abstraction is inspired by the map and reduce primitives present in Lisp and many other functional language.</p>
 
         </div>
         
@@ -204,22 +196,16 @@ if (!doNotTrack) {
 
 <div class="post-info">
     
-        <div class="post-date dt-published">2021-12-24</div>
+        <div class="post-date dt-published">2021-12-26</div>
     
 
-    <a class="post-hidden-url u-url" href="https://hbjzxzx.github.io/posts/k8s/k8s_introduce/">https://hbjzxzx.github.io/posts/k8s/k8s_introduce/</a>
+    <a class="post-hidden-url u-url" href="https://hbjzxzx.github.io/posts/distr_sys/introduce/">https://hbjzxzx.github.io/posts/distr_sys/introduce/</a>
     <a href="https://hbjzxzx.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">zhenxingxu</a>
 
 
     <div class="post-taxonomies">
         
             
-                <ul class="post-tags">
-                    
-                        <li><a href="https://hbjzxzx.github.io/tags/k8s">#k8s</a></li>
-                    
-                </ul>
-        
     </div>
 </div>
 
@@ -230,12 +216,12 @@ if (!doNotTrack) {
     <div class="pagination post-pagination">
         <div class="left pagination-item ">
             
-                <a href="/posts/category/introduce/">Introduce</a>
+                <a href="/posts/temp_note/state_pattern/">State_pattern</a>
             
         </div>
         <div class="right pagination-item ">
             
-                <a href="/posts/k8s/install_k8s/">K8s Install Guide</a>
+                <a href="/posts/category/introduce/">Introduce</a>
             
         </div>
     </div>

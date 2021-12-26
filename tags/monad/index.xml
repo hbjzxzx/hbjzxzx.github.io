@@ -38,6 +38,15 @@
 	return x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (x, mempty)
 	(&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (x, v)) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (y, v&amp;#39;)) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f x &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt;(y, v `mappend` v&amp;#39;)
 	tell m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; return &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; ((), m)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; Control.Monad.Writer
+&lt;span style=&#34;color:#a6e22e&#34;&gt;my_gcd&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; [&lt;span style=&#34;color:#66d9ef&#34;&gt;String&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;my_gcd&lt;/span&gt; a b
+    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt;
+        tell [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Finished with &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; show a]
+        return a
+    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; otherwise &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt;
+        tell [show a &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; mod &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; show b &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; = &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; show (a `mod` b)]
+        my_gcd b (a `mod` b)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     

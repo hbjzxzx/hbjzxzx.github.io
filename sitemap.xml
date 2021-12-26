@@ -2,19 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hbjzxzx.github.io/posts/alog/dp_practice/70_climbing_stairs/</loc>
+    <lastmod>2021-12-26T12:08:19+08:00</lastmod>
+  </url><url>
+    <loc>https://hbjzxzx.github.io/posts/</loc>
+    <lastmod>2021-12-26T12:08:19+08:00</lastmod>
+  </url><url>
+    <loc>https://hbjzxzx.github.io/</loc>
+    <lastmod>2021-12-26T12:08:19+08:00</lastmod>
+  </url><url>
+    <loc>https://hbjzxzx.github.io/posts/alog/ch2_divede_conquer/</loc>
+    <lastmod>2021-12-26T11:44:19+08:00</lastmod>
+  </url><url>
+    <loc>https://hbjzxzx.github.io/posts/temp_note/state_pattern/</loc>
+    <lastmod>2021-12-26T11:43:40+08:00</lastmod>
+  </url><url>
+    <loc>https://hbjzxzx.github.io/posts/distr_sys/introduce/</loc>
+    <lastmod>2021-12-26T11:42:20+08:00</lastmod>
+  </url><url>
+    <loc>https://hbjzxzx.github.io/posts/category/introduce/</loc>
+    <lastmod>2021-12-26T11:41:38+08:00</lastmod>
+  </url><url>
     <loc>https://hbjzxzx.github.io/tags/k8s/</loc>
     <lastmod>2021-12-24T14:09:48+08:00</lastmod>
   </url><url>
     <loc>https://hbjzxzx.github.io/posts/k8s/k8s_introduce/</loc>
     <lastmod>2021-12-24T14:09:48+08:00</lastmod>
   </url><url>
-    <loc>https://hbjzxzx.github.io/posts/</loc>
-    <lastmod>2021-12-24T14:09:48+08:00</lastmod>
-  </url><url>
     <loc>https://hbjzxzx.github.io/tags/</loc>
-    <lastmod>2021-12-24T14:09:48+08:00</lastmod>
-  </url><url>
-    <loc>https://hbjzxzx.github.io/</loc>
     <lastmod>2021-12-24T14:09:48+08:00</lastmod>
   </url><url>
     <loc>https://hbjzxzx.github.io/posts/k8s/install_k8s/</loc>

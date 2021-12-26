@@ -6,10 +6,296 @@
     <description>ZhenxingXu&#39;s Personal Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Dec 2021 14:09:48 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 26 Dec 2021 12:08:19 +0800</lastBuildDate>
     
     <atom:link href="https://hbjzxzx.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>70_Climbing_Stairs</title>
+      <link>https://hbjzxzx.github.io/posts/alog/dp_practice/70_climbing_stairs/</link>
+      <pubDate>Sun, 26 Dec 2021 12:08:19 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/alog/dp_practice/70_climbing_stairs/</guid>
+      <description>&lt;h1 id=&#34;climbing-stairs&#34;&gt;Climbing Stairs&lt;/h1&gt;
+&lt;p&gt;You are climbing a staircase. It takes &lt;code&gt;n&lt;/code&gt; steps to reach the top.Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?&lt;/p&gt;
+&lt;p&gt;Original problem &lt;a href=&#34;https://leetcode-cn.com/problems/climbing-stairs&#34;&gt;Leetcode 70&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;recursive-code&#34;&gt;Recursive code&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# use the recursice f(n) = f(n-1) + f(n-2) for all n &amp;gt; 2&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;climbStairs&lt;/span&gt;(self, n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+  	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+    	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+  	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+    	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+  	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; f(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; f(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# you can also use cache to boost up&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; functools &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cache
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;iterate&#34;&gt;Iterate&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; itertools &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; dropwhile
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Iterable
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;climbStairs&lt;/span&gt;(self, n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        infinite_series &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; enumerate(Solution&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;series())
+        infinite_series &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dropwhile(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; pair: pair[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, infinite_series)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; next(infinite_series)[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@staticmethod&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;series&lt;/span&gt;() &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Iterable[int]:
+        s1, s2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; s1
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; s2
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+            tmp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s2
+            s2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; s2
+            s1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tmp
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; s2
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;matrix-multiply&#34;&gt;Matrix Multiply&lt;/h2&gt;
+&lt;p&gt;Notice that the iterating states of f(n) = f(n-1) + f(n-2) can be described by matrix multiply
+$$
+\begin{align}
+\begin{bmatrix}f(n)\ f(n-1)\end{bmatrix}
+= \begin{bmatrix}1&amp;amp; 1\ 1 &amp;amp; 0\\end{bmatrix}
+* \begin{bmatrix}f(n-1) \ f(n-2)\end{bmatrix}
+\
+\begin{bmatrix}f(n) \ f(n-1)\end{bmatrix}
+=\begin{bmatrix}1 &amp;amp; 1\ 1 &amp;amp; 0\end{bmatrix}^{n-2}
+* \begin{bmatrix} f(2) \ f(1) \end{bmatrix}
+\end{align}
+$$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; itertools &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; repeat
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Iterable
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; copy &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; deepcopy
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy
+M &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Iterable[Iterable[int]]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;climbStairs&lt;/span&gt;(self, n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        transform_matrix &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ((&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;))
+        init_vector &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ((&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,), (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,))
+        get_matrix_r1_c1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; m: next(next(m))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+           &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; get_matrix_r1_c1(Solution&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matrix_mul(
+           Solution&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matrix2_power(transform_matrix, n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;),
+           init_vector
+            ))
+       
+
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@staticmethod&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;matrix2_power&lt;/span&gt;(matrix: M, pow: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; M:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pow &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ((&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
+        &lt;span style=&#34;color:#75715e&#34;&gt;# power a row major matrix&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pow &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; matrix
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pow &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Solution&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matrix_mul(matrix, matrix)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pow &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Solution&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matrix2_power(
+                Solution&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matrix2_power(matrix, pow&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;),
+                &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            )
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Solution&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matrix_mul(
+                matrix,
+                Solution&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matrix2_power(matrix, pow&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            )
+            
+    
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@staticmethod&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;matrix_mul&lt;/span&gt;(ma: M, mb: M) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; M:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ma &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; mb:
+            mb &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; deepcopy(ma)
+        mb_col_major &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(zip(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;mb))
+        col_size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(mb_col_major) 
+        sum_vecs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; vecs: map(sum, zip(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;vecs))
+        vec_multi_scalar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; vec, scalar: map(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; raw: raw&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;scalar, vec)
+        matrix_multi_vec &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; matrix, vec: sum_vecs(map(vec_multi_scalar, matrix, vec))
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; map(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; matrix, col_vec: matrix_multi_vec(matrix, col_vec), 
+                        [deepcopy(m) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; repeat(ma, col_size)], 
+                        mb_col_major)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ch2_divede_conquer</title>
+      <link>https://hbjzxzx.github.io/posts/alog/ch2_divede_conquer/</link>
+      <pubDate>Sun, 26 Dec 2021 11:44:19 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/alog/ch2_divede_conquer/</guid>
+      <description>&lt;h1 id=&#34;divide-and-conquer&#34;&gt;Divide And Conquer&lt;/h1&gt;
+&lt;h2 id=&#34;1-divide-the-problem-into-one-or-some-subproblems&#34;&gt;1. Divide the problem into one or some subproblems&lt;/h2&gt;
+&lt;h2 id=&#34;2-conquer-each-subproblem-recursively&#34;&gt;2. Conquer each subproblem recursively&lt;/h2&gt;
+&lt;h2 id=&#34;3-combine-solutions&#34;&gt;3. Combine solutions&lt;/h2&gt;
+&lt;h2 id=&#34;ex1-merge-sort&#34;&gt;Ex1 Merge Sort&lt;/h2&gt;
+&lt;h2 id=&#34;divide-trivial-just-divice-it-into-half&#34;&gt;Divide: trivial, just divice it into half!&lt;/h2&gt;
+&lt;h2 id=&#34;conquer-recursively-solves-each-array&#34;&gt;Conquer: recursively solves each array&lt;/h2&gt;
+&lt;h2 id=&#34;combine-merge-the-tow-ordered-array&#34;&gt;Combine: Merge the tow ordered array&lt;/h2&gt;
+&lt;h3 id=&#34;running-time-tn2tfracn2--n-that-is-on-lg-n&#34;&gt;Running Time: $T(n)=2T(\frac{n}{2}) + n$ that is $O(n \lg n)$&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merge_sort&lt;/span&gt;(array: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+    a_len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(array)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a_len &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; array
+    fst, snd &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; array[:a_len&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], array[a_len&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:]
+    fst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; merge_sort(fst)
+    snd &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; merge_sort(snd)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; merge(fst, snd)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merge&lt;/span&gt;(xs1: List[int], xs2: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; xs1 &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; xs2:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; xs1[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; xs2[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]:
+            result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(xs2[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+            xs2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xs2[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; xs1[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; xs2[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]:
+            result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(xs1[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+            xs1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xs1[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; xs1:
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;extend(xs1) 
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; xs2:
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;extend(xs2)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+
+l, r, max_len, arr_cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+rand_list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; alen: [randint(l, r) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(alen)], 
+                    [randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, max_len) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(arr_cnt) ]) 
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; arr &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; tqdm(rand_list):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; merge_sort(arr) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; sorted(arr)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AssertionError&lt;/span&gt;:
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;assert failed, original: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;arr&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, std: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sorted(arr)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, my:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;merge_sort(arr)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ex2-binary-search&#34;&gt;Ex2 Binary Search&lt;/h2&gt;
+&lt;h2 id=&#34;divide-compare-x-with-middle-elem-in-array&#34;&gt;Divide: compare x with middle elem in array&lt;/h2&gt;
+&lt;h2 id=&#34;conquer-recurse-in-one-subarray&#34;&gt;Conquer: recurse in one subarray&lt;/h2&gt;
+&lt;h2 id=&#34;combine-trivial-nothing-to-do&#34;&gt;Combine: trivial, nothing to do!&lt;/h2&gt;
+&lt;h3 id=&#34;running-time-tntfracn2o1-that-is-olg-n&#34;&gt;Running Time: $T(n)=T(\frac{n}{2})+O(1)$ that is $O(\lg n)$&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(arr: List[int], lo:int, hi:int, num: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lo &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; hi:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (lo &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; hi) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; arr[mid] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; num:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; binary_search(arr, lo, mid, num)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; arr[mid] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; num:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; binary_search(arr, mid&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, hi, num)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; mid
+
+l, r, ll &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10000000&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+rand_list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sorted([randint(l, r) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ll)])
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; tqdm(range(&lt;span style=&#34;color:#ae81ff&#34;&gt;100000&lt;/span&gt;)):
+    sel &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, ll&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+        find_index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; binary_search(rand_list, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, len(rand_list), rand_list[sel])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; rand_list[find_index] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; rand_list[sel]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt;:
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;epect :&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sel&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, return &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;find_index&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, input: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;rand_list&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ex3-powwering-a-number-given-number-x-integer-n-ge-0-compute-xn&#34;&gt;Ex3 Powwering a number: given number x, integer $n \ge 0$, compute $x^n$&lt;/h2&gt;
+&lt;h2 id=&#34;divide&#34;&gt;Divide:&lt;/h2&gt;
+&lt;p&gt;$$
+sign(x) = \left{
+\begin{aligned}
+x^{\frac{n}{2}} \cdot x^{\frac{n}{2}} \quad even \&lt;/p&gt;
+&lt;p&gt;x^{\frac{n-1}{2}} \cdot x^{\frac{n-1}{2}} \cdot x \quad odd \
+\end{aligned}
+\right.
+$$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;power&lt;/span&gt;(x: float, y: float) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int :
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; power(x, (y&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; power(x, (y&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; power(x, y&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; power(x, y&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;)
+base_power_list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [(randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;), randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;)) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(cnt)]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; all(
+    map(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; b, p: (b&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;p &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; power(b, p))&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.001&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;zip(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;base_power_list))
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ex4-fibonacci-numbers&#34;&gt;Ex4 Fibonacci numbers&lt;/h2&gt;
+&lt;p&gt;Divide:
+$$
+\begin{pmatrix} f_{n+1} &amp;amp; f_{n} \ f_{n} &amp;amp; f_{n-1} \end{pmatrix} =
+\begin{pmatrix} 1 &amp;amp; 1 \ 1 &amp;amp; 0 \end{pmatrix}^n
+$$&lt;/p&gt;
+&lt;h2 id=&#34;matrix-multiplicationstrassens-algorithm&#34;&gt;Matrix multiplication(strassen&amp;rsquo;s algorithm)&lt;/h2&gt;
+&lt;h2 id=&#34;vlsi-layout-find-layout-that-make-a-complete-binary-tree-with-n-leaves-have-mininal-area&#34;&gt;VLSI layout: find layout that make a complete binary tree with n leaves have mininal area&lt;/h2&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>State_pattern</title>
+      <link>https://hbjzxzx.github.io/posts/temp_note/state_pattern/</link>
+      <pubDate>Sun, 26 Dec 2021 11:43:40 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/temp_note/state_pattern/</guid>
+      <description>&lt;p&gt;Design patterns are conventional solutions to common chanllenges in software development using OO. One of the famous pattern is state pattern&lt;/p&gt;
+&lt;h1 id=&#34;finite-state-machine&#34;&gt;Finite State Machine&lt;/h1&gt;
+&lt;p&gt;A FSM is something that behaves differently depending on its internal state. That is the behaves of an object depending on its state.&lt;/p&gt;
+&lt;p&gt;A simple example is light bulb object, the follwing code is straightforward and simple, however if there are many &lt;strong&gt;states&lt;/strong&gt; and &lt;strong&gt;transitions&lt;/strong&gt; thing will get complex. To  simplies this, we can use State Pattern.&lt;/p&gt;
+&lt;p&gt;The core idea of FSM is the behavior depending on the states! We should focus on state-specific behavior and the transitions of states.&lt;/p&gt;
+&lt;h2 id=&#34;uml-diagram&#34;&gt;UML Diagram&lt;/h2&gt;
+&lt;p&gt;The original class keeps a reference to state object based on its state rather than using conditional statements to implement state-specific function&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduce</title>
+      <link>https://hbjzxzx.github.io/posts/distr_sys/introduce/</link>
+      <pubDate>Sun, 26 Dec 2021 11:42:20 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/distr_sys/introduce/</guid>
+      <description>&lt;h1 id=&#34;target-of-distributed-system&#34;&gt;Target of distributed system&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Parallelism(Perfermance)&lt;/li&gt;
+&lt;li&gt;Fault tolerance&lt;/li&gt;
+&lt;li&gt;Physical distributed&lt;/li&gt;
+&lt;li&gt;security/isolated&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;challenge&#34;&gt;challenge&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;concurrency&lt;/li&gt;
+&lt;li&gt;partial failure&lt;/li&gt;
+&lt;li&gt;perfermance&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;example-mapreduce&#34;&gt;example MapReduce&lt;/h1&gt;
+&lt;h2 id=&#34;mapreduce-simplified-data-processing-on-large-clusters&#34;&gt;MapReduce: Simplified Data Processing on Large Clusters&lt;/h2&gt;
+&lt;p&gt;A new abstraction that allow us to express the simple computations we were trying to perform but hides the messy details of parallelization, fault-tolerance, data distribution and load balancing.
+This abstraction is inspired by the map and reduce primitives present in Lisp and many other functional language.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduce</title>
+      <link>https://hbjzxzx.github.io/posts/category/introduce/</link>
+      <pubDate>Sun, 26 Dec 2021 11:41:38 +0800</pubDate>
+      
+      <guid>https://hbjzxzx.github.io/posts/category/introduce/</guid>
+      <description>&lt;p&gt;In general, there are two method to handle complex problem using an OOP Style; The one is Abstract, the other is seal; Things become uncontrollable when encountering parallelism case; Data sharing and data consistent challenges a lot;&lt;/p&gt;
+&lt;p&gt;The Functional Style which based on Lambda Calculation computation module is an alternative method to overcome it; Compared to traditional Imperative languages such as c, cpp, python, which use the Turning  machine as computering model, the functional language provids a higher layer to model the computation&lt;/p&gt;
+&lt;h1 id=&#34;category&#34;&gt;Category&lt;/h1&gt;
+&lt;p&gt;observing thign on higher level;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Define&lt;/strong&gt; : A Category consist of objects and morphism which connecting objects on one direction.&lt;/p&gt;
+&lt;p&gt;From the functions‘ &lt;strong&gt;domain&lt;/strong&gt; and &lt;strong&gt;codomain&lt;/strong&gt; ，and its &lt;strong&gt;image&lt;/strong&gt; we  divide the functions into surjection nad injection. Using a similary conception, we can also have monomorphism and epicmorphism.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Isomorphism&lt;/strong&gt; is a morphism which is both monomorphism and empicmorphism&lt;/p&gt;
+&lt;h3 id=&#34;to-do-how-to-define-the-monoepic-morphism-without-looking-inside-the-concrete-elements-in-set&#34;&gt;to do how to define the mono,epic morphism without looking inside the concrete elements in set;&lt;/h3&gt;
+&lt;h2 id=&#34;special-objects&#34;&gt;Special objects&lt;/h2&gt;
+&lt;h3 id=&#34;terminal-objects&#34;&gt;Terminal objects&lt;/h3&gt;
+&lt;p&gt;$$
+\forall a \exist f:: a\to() \
+\forall f::a\to(), \forall f::b\to() &lt;br&gt;
+$$&lt;/p&gt;
+&lt;p&gt;if we reverse all the morphism, then () is called init object&lt;/p&gt;
+&lt;h2 id=&#34;products-and-co-product&#34;&gt;Products and Co-Product&lt;/h2&gt;
+&lt;p&gt;$$&lt;/p&gt;
+&lt;p&gt;$$&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>K8s Introduce</title>
@@ -142,6 +428,15 @@ sudo apt-mark hold kubelet kubeadm kubectl
 	return x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (x, mempty)
 	(&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (x, v)) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; (y, v&amp;#39;)) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f x &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt;(y, v `mappend` v&amp;#39;)
 	tell m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; return &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; ((), m)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; Control.Monad.Writer
+&lt;span style=&#34;color:#a6e22e&#34;&gt;my_gcd&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Writer&lt;/span&gt; [&lt;span style=&#34;color:#66d9ef&#34;&gt;String&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;my_gcd&lt;/span&gt; a b
+    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt;
+        tell [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Finished with &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; show a]
+        return a
+    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; otherwise &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt;
+        tell [show a &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; mod &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; show b &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; = &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; show (a `mod` b)]
+        my_gcd b (a `mod` b)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
